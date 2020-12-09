@@ -123,6 +123,15 @@ for color, rgb in pairs(bakedclayaddition.colors) do
         groups = {cracky=3, bakedclay=1},
         sounds = default.node_sound_stone_defaults()
       })
+      
+      if bakedclayaddition.stairs_and_slabs then
+        stairs.register_stair_and_slab("bakedclayaddition_"..color.."_"..index, "bakedclayaddition:"..color.."_"..index,
+          {cracky = 3, bakedclay=1},
+          {"blank.png^[colorize:"..colorstring..":255^white_"..white..".png^black_"..black..".png^noise"..math.random(1,12)..".png"},
+          Description(color.."_"..index.."_baked_clay_stair"),
+          Description(color.."_"..index.."_baked_clay_slab"),
+          default.node_sound_stone_defaults())
+      end
       index = index + 1
     end
   end
@@ -137,4 +146,13 @@ for color, rgb in pairs(bakedclayaddition.grayscale) do
     groups = {cracky=3, bakedclay=1},
     sounds = default.node_sound_stone_defaults()
   })
+  
+  if bakedclayaddition.stairs_and_slabs then
+    stairs.register_stair_and_slab("bakedclayaddition_"..color, "bakedclayaddition:"..color,
+      {cracky = 3, bakedclay=1},
+      {"blank.png^[colorize:"..colorstring..":255^noise"..math.random(1,12)..".png"},
+      Description(color.."_".."_baked_clay_stair"),
+      Description(color.."_".."_baked_clay_slab"),
+      default.node_sound_stone_defaults())
+  end
 end
