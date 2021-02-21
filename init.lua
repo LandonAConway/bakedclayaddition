@@ -35,6 +35,28 @@ bakedclayaddition.colors = {
   orange_red = {r=255,g=64,b=0}
 }
 
+bakedclayaddition.colors_cmy = {
+  red = {c=0,m=100,y=100},
+  pink = {c=0,m=100,y=50},
+  magenta = {c=0,m=100,y=0},
+  purple = {c=20,m=100,y=0},
+  violet = {c=50,m=100,y=0},
+  violet_blue = {c=67,m=100,y=0},
+  blue = {c=100,m=100,y=0},
+  blue_cyan = {c=100,m=50,y=0},
+  cyan = {c=100,m=0,y=0},
+  cyan_aqua = {c=100,m=0,y=25},
+  aqua = {c=100,m=0,y=50},
+  green = {c=100,m=0,y=100},
+  lime = {c=50,m=0,y=100},
+  lime_yellow = {c=25,m=0,y=100},
+  yellow = {c=0,m=0,y=100},
+  golden_yellow = {c=0,m=25,y=100},
+  yellow_orange = {c=0,m=36,y=100},
+  orange = {c=0,m=50,y=100},
+  orange_red = {c=0,m=75,y=100}
+}
+
 bakedclayaddition.grayscale = {
   white = {r=255,g=255,b=255},
   light_grey_1 = {r=232,g=232,b=232},
@@ -123,6 +145,32 @@ for color, rgb in pairs(bakedclayaddition.colors) do
         groups = {cracky=3, bakedclay=1},
         sounds = default.node_sound_stone_defaults()
       })
+      
+      --current / maximum = percentage
+      local cmy = bakedclayaddition.colors_cmy[color]
+      local max = 0.125
+      colorizer.register_craft({
+        input = "default:clay",
+        output = "bakedclayaddition:"..color.."_"..index,
+        ink_usage = {
+          white = 1 * max,
+          black = (black / variations) * max,
+          magenta = (cmy.m / 100) * max,
+          yellow = (cmy.y / 100) * max,
+          cyan = (cmy.c / 100) * max
+        }
+      })
+      
+      minetest.register_alias("bc_"..color.."_"..index, "bakedclayaddition:"..color.."_"..index)
+      
+      if bakedclayaddition.stairs_and_slabs then
+        stairs.register_stair_and_slab("bakedclayaddition_"..color.."_"..index, "bakedclayaddition:"..color.."_"..index,
+          {cracky = 3, bakedclay=1},
+          {"blank.png^[colorize:"..colorstring..":255^white_"..white..".png^black_"..black..".png^noise"..math.random(1,12)..".png"},
+          Description(color.."_"..index.."_baked_clay_stair"),
+          Description(color.."_"..index.."_baked_clay_slab"),
+          default.node_sound_stone_defaults())
+      end
       index = index + 1
     end
   end
@@ -137,4 +185,28 @@ for color, rgb in pairs(bakedclayaddition.grayscale) do
     groups = {cracky=3, bakedclay=1},
     sounds = default.node_sound_stone_defaults()
   })
+  
+  local max = 0.125
+  colorizer.register_craft({
+    input = "default:clay",
+    output = "bakedclayaddition:"..color,
+    ink_usage = {
+      white = 1 * max,
+      black = (rgb.r / 12) * max,
+      magenta = 0,
+      yellow = 0,
+      cyan = 0,
+    }
+  })
+  
+  minetest.register_alias("bc_"..color, "bakedclayaddition:"..color)
+  
+  if bakedclayaddition.stairs_and_slabs then
+    stairs.register_stair_and_slab("bakedclayaddition_"..color, "bakedclayaddition:"..color,
+      {cracky = 3, bakedclay=1},
+      {"blank.png^[colorize:"..colorstring..":255^noise"..math.random(1,12)..".png"},
+      Description(color.."_".."_baked_clay_stair"),
+      Description(color.."_".."_baked_clay_slab"),
+      default.node_sound_stone_defaults())
+  end
 end
