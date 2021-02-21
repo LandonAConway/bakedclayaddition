@@ -146,7 +146,10 @@ for color, rgb in pairs(bakedclayaddition.colors) do
         sounds = default.node_sound_stone_defaults()
       })
       
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
       --current / maximum = percentage
       local cmy = bakedclayaddition.colors_cmy[color]
       local max = 0.125
@@ -164,8 +167,11 @@ for color, rgb in pairs(bakedclayaddition.colors) do
       
       minetest.register_alias("bc_"..color.."_"..index, "bakedclayaddition:"..color.."_"..index)
       
+<<<<<<< Updated upstream
 =======
 >>>>>>> 50a1c9e3ebfcb4f17edcc57367107d22d42f639b
+=======
+>>>>>>> Stashed changes
       if bakedclayaddition.stairs_and_slabs then
         stairs.register_stair_and_slab("bakedclayaddition_"..color.."_"..index, "bakedclayaddition:"..color.."_"..index,
           {cracky = 3, bakedclay=1},
@@ -189,7 +195,10 @@ for color, rgb in pairs(bakedclayaddition.grayscale) do
     sounds = default.node_sound_stone_defaults()
   })
   
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
   local max = 0.125
   colorizer.register_craft({
     input = "default:clay",
@@ -205,8 +214,11 @@ for color, rgb in pairs(bakedclayaddition.grayscale) do
   
   minetest.register_alias("bc_"..color, "bakedclayaddition:"..color)
   
+<<<<<<< Updated upstream
 =======
 >>>>>>> 50a1c9e3ebfcb4f17edcc57367107d22d42f639b
+=======
+>>>>>>> Stashed changes
   if bakedclayaddition.stairs_and_slabs then
     stairs.register_stair_and_slab("bakedclayaddition_"..color, "bakedclayaddition:"..color,
       {cracky = 3, bakedclay=1},
